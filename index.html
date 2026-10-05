@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="rn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>MBCTIMES | Amakuru y'Ubwoko Bwose</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f6f8;
+      color: #111;
+    }
+
+    /* TOP BAR */
+    .topbar {
+      background: #071b3a;
+      color: white;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 12px;
+      font-size: 12px;
+    }
+
+    .live {
+      color: #ff3333;
+      font-weight: bold;
+    }
+
+    /* HEADER */
+    header {
+      background: white;
+      border-bottom: 4px solid #c8102e;
+      padding: 12px 10px;
+    }
+
+    .header-content {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .logo {
+      font-size: 30px;
+      font-weight: 900;
+      letter-spacing: -1px;
+      color: #071b3a;
+    }
+
+    .logo span {
+      color: #c8102e;
+    }
+
+    .tagline {
+      font-size: 11px;
+      color: #555;
+      margin-top: 3px;
+    }
+
+    /* FLAGS */
+    .flags {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .flag {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid white;
+      box-shadow: 0 2px 8px #999;
+      animation: rotateFlag 5s linear infinite;
+    }
+
+    .flag:nth-child(2) {
+      animation-delay: 1.5s;
+    }
+
+    @keyframes rotateFlag {
+      0% {
+        transform: rotateY(0deg);
+      }
+      50% {
+        transform: rotateY(180deg);
+      }
+      100% {
+        transform: rotateY(360deg);
+      }
+    }
+
+    /* NAVIGATION */
+    nav {
+      background: #071b3a;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    nav .nav-inner {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 13px 15px;
+      display: block;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      background: #c8102e;
+    }
+
+    /* WHATSAPP */
+    .whatsapp {
+      position: fixed;
+      right: 15px;
+      bottom: 18px;
+      width: 58px;
+      height: 58px;
+      background: #25d366;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 29px;
+      box-shadow: 0 4px 15px #555;
+      z-index: 999;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(37,211,102,.6);
+      }
+
+      70% {
+        box-shadow: 0 0 0 14px rgba(37,211,102,0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(37,211,102,0);
+      }
+    }
+
+    /* BREAKING NEWS */
+    .breaking {
+      background: #c8102e;
+      color: white;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      height: 38px;
+    }
+
+    .breaking-title {
+      background: #071b3a;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      font-weight: bold;
+      font-size: 12px;
+      z-index: 2;
+    }
+
+    .ticker {
+      white-space: nowrap;
+      animation: ticker 20s linear infinite;
+      font-size: 13px;
+      padding-left: 100%;
+    }
+
+    @keyframes ticker {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-100%);
+      }
+    }
+
+    /* MAIN */
+    .container {
+      max-width: 1100px;
+      margin: 18px auto;
+      padding: 0 12px;
+    }
+
+    .hero {
+      background: #071b3a;
+      color: white;
+      border-radius: 8px;
+      padding: 25px 18px;
+      margin-bottom: 18px;
+    }
+
+    .hero small {
+      color: #ddd;
+    }
+
+    .hero h1 {
+      font-size: 27px;
+      line-height: 1.2;
+      margin: 10px 0;
+    }
+
+    .hero p {
+      color: #ddd;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .read-more {
+      display: inline-block;
+      background: #c8102e;
+      color: white;
+      text-decoration: none;
+      padding: 10px 15px;
+      margin-top: 15px;
+      border-radius: 4px;
+      font-weight: bold;
+      font-size: 13px;
+    }
+
+    /* NEWS GRID */
+    .section-title {
+      border-left: 5px solid #c8102e;
+      padding-left: 10px;
+      margin: 20px 0 12px;
+      color: #071b3a;
+      font-size: 20px;
+    }
+
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 7px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,.10);
+    }
+
+    .card-image {
+      height: 150px;
+      background: linear-gradient(135deg, #071b3a, #c8102e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .card-body {
+      padding: 13px;
+    }
+
+    .category {
+      color: #c8102e;
+      font-size: 11px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .card h3 {
+      color: #071b3a;
+      font-size: 17px;
+      margin: 7px 0;
+      line-height: 1.3;
+    }
+
+    .card p {
+      color: #555;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #071b3a;
+      color: white;
+      margin-top: 30px;
+      padding: 25px 15px;
+      text-align: center;
+    }
+
+    footer strong {
+      color: white;
+      font-size: 21px;
+    }
+
+    footer p {
+      margin-top: 8px;
+      color: #ccc;
+      font-size: 12px;
+    }
+
+    .social {
+      margin-top: 15px;
+    }
+
+    .social a {
+      color: white;
+      text-decoration: none;
+      margin: 0 7px;
+      font-size: 13px;
+    }
+
+    /* MOBILE */
+    @media (max-width: 700px) {
+
+      .logo {
+        font-size: 25px;
+      }
+
+      .tagline {
+        font-size: 9px;
+      }
+
+      .flag {
+        width: 35px;
+        height: 35px;
+      }
+
+      .news-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 23px;
+      }
+
+      .card-image {
+        height: 170px;
+      }
+
+      nav a {
+        padding: 12px 13px;
+        font-size: 12px;
+      }
+    }
+
+    @media (min-width: 701px) and (max-width: 900px) {
+      .news-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <span>MBCTIMES</span>
+    <span class="live">● LIVE</span>
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-content">
+
+      <div>
+        <div class="logo">
+          MBC<span>TIMES</span>
+        </div>
+
+        <div class="tagline">
+          Ijwi ry'Abanyagihugu • Ukuri • Ubwigenge
+        </div>
+      </div>
+
+      <!-- BURUNDI & RWANDA FLAGS -->
+      <div class="flags">
+
+        <!-- Burundi flag -->
+        <img
+          class="flag"
+          alt="Drape y'Uburundi"
+          src="https://flagcdn.com/w80/bi.png"
+        >
+
+        <!-- Rwanda flag -->
+        <img
+          class="flag"
+          alt="Drape y'u Rwanda"
+          src="https://flagcdn.com/w80/rw.png"
+        >
+
+      </div>
+
+    </div>
+  </header>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="nav-inner">
+
+      <a href="#">AHABANZA</a>
+      <a href="#">AFRIKA</a>
+      <a href="#">ISI</a>
+      <a href="#">POLITIKI</a>
+      <a href="#">UBUTUNZI</a>
+      <a href="#">INKINO</a>
+      <a href="#">AMATOHOZA</a>
+      <a href="#">UBUZIMA</a>
+
+    </div>
+  </nav>
+
+  <!-- BREAKING NEWS -->
+  <div class="breaking">
+
+    <div class="breaking-title">
+      AMAKURU
+    </div>
+
+    <div class="ticker">
+      MBCTIMES — Amakuru agezweho mu Burundi, mu Rwanda, muri Afrika no kw'isi yose...
+    </div>
+
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="container">
+
+    <!-- MAIN STORY -->
+    <section class="hero">
+
+      <small>AMAKURU AGEZWEHO</small>
+
+      <h1>
+        MBCTIMES — Amakuru yizewe, ijwi ry'abanyagihugu
+      </h1>
+
+      <p>
+        Turabashikiriza amakuru yihuta, yisunze ukuri,
+        ubushakashatsi n'ivyemezo, mu Burundi, mu Rwanda,
+        muri Afrika no kw'isi yose.
+      </p>
+
+      <a class="read-more" href="#">
+        Soma inkuru →
+      </a>
+
+    </section>
+
+
+    <!-- AFRICA -->
+    <h2 class="section-title">
+      🌍 AFRIKA
+    </h2>
+
+    <div class="news-grid">
+
+      <article class="card">
+
+        <div class="card-image">
+          BURUNDI
+        </div>
+
+        <div class="card-body">
+
+          <div class="category">
+            Burundi
+          </div>
+
+          <h3>
+            Amakuru mashasha ava mu Burundi
+          </h3>
+
+          <p>
+            MBCTIMES ibashikiriza amakuru mashasha
+            n'inkuru z'ingenzi.
+          </p>
+
+        </div>
+
+      </article>
+
+
+      <article class="card">
+
+        <div class="card-image">
+          RWANDA
+        </div>
+
+        <div class="card-body">
+
+          <div class="category">
+            Rwanda
+          </div>
+
+          <h3>
+            Rwanda: amakuru mashasha
+          </h3>
+
+          <p>
+            Kurikirana ibivugwa n'ibikorwa bikomeye
+            muri Afrika y'Ubuseruko.
+          </p>
+
+        </div>
+
+      </article>
+
+
+      <article class="card">
+
+        <div class="card-image">
+          AFRIKA
+        </div>
+
+        <div class="card-body">
+
+          <div class="category">
+            Afrika
+          </div>
+
+          <h3>
+            Afrika n'ibibazo bihambaye
+          </h3>
+
+          <p>
+            Inkuru zisesanguye ku bijanye na politike,
+            ubutunzi, umutekano n'imibereho.
+          </p>
+
+        </div>
+
+      </article>
+
+    </div>
+
+
+    <!-- WORLD -->
+    <h2 class="section-title">
+      🌎 ISI
+    </h2>
+
+    <div class="news-grid">
+
+      <article class="card">
+
+        <div class="card-image">
+          ISI
+        </div>
+
+        <div class="card-body">
+
+          <div class="category">
+            Isi
+          </div>
+
+          <h3>
+            Amakuru mpuzamakungu
+          </h3>
+
+          <p>
+            Menya ibiriko biraba mu bice bitandukanye
+            vy'isi.
+          </p>
+
+        </div>
+
+      </article>
+
+
+      <article class="card">
+
+        <div class="card-image">
+          AMATOHOZA
+        </div>
+
+        <div class="card-body">
+
+          <div class="category">
+            Amatohoza
+          </div>
+
+          <h3>
+            Inkuru z'amatohoza
+          </h3>
+
+          <p>
+            Ubushakashatsi bwimbitse bushingiye ku bimenyetso
+            no ku majwi y'abanyagihugu.
+          </p>
+
+        </div>
+
+      </article>
+
+
+      <article class="card">
+
+        <div class="card-image">
+          INKINO
+        </div>
+
+        <div class="card-body">
+
+          <div class="category">
+            Inkino
+          </div>
+
+          <h3>
+            Inkino n'umupira w'amaguru
+          </h3>
+
+          <p>
+            Kurikirana amakuru mashasha ava mu nkino
+            mpuzamakungu.
+          </p>
+
+        </div>
+
+      </article>
+
+    </div>
+
+  </main>
+
+
+  <!-- WHATSAPP BUTTON -->
+  <a
+    class="whatsapp"
+    href="https://wa.me/260977200158"
+    target="_blank"
+    aria-label="WhatsApp MBCTIMES"
+  >
+    ☎
+  </a>
+
+
+  <!-- FOOTER -->
+  <footer>
+
+    <strong>MBCTIMES</strong>
+
+    <p>
+      Ijwi ry'Abanyagihugu • Ukuri kwawe
+    </p>
+
+    <div class="social">
+      <a href="#">Facebook</a>
+      <a href="#">YouTube</a>
+      <a href="#">Instagram</a>
+      <a href="#">X</a>
+    </div>
+
+    <p>
+      © 2026 MBCTIMES. All Rights Reserved.
+    </p>
+
+  </footer>
+
+</body>
+  </html>
